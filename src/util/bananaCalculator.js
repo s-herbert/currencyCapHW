@@ -21,6 +21,11 @@ function getBananaBudget(startDateStr, numberOfDays) {
   const ONE_DAY_MS = 86400000;
   const weeklyBananaPrices = [0.05, 0.1, 0.15, 0.2, 0.25];
   let currentDate = new Date(startDateStr);
+
+  if (isNaN(currentDate)) {
+    throw new Error('Invalid date input');
+  }
+
   let total = 0;
 
   while (numberOfDays > 0) {
@@ -31,6 +36,7 @@ function getBananaBudget(startDateStr, numberOfDays) {
       const costToday = weeklyBananaPrices[weekOfMonth];
       total += costToday;
       currentDate = new Date(currentDate.getTime() + ONE_DAY_MS);
+      numberOfDays--;
     }
   }
   return total;
