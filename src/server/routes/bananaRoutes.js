@@ -1,10 +1,7 @@
-const {
-  calculateTotal,
-  sendTotal
-} = require('../controllers/budgetController');
+const { getTotal, sendTotal } = require('../controllers/budgetController');
 
 const routes = app => {
-  app.get('/banana-budget', calculateTotal, sendTotal);
+  app.get('/banana-budget', getTotal, sendTotal);
 };
 
 module.exports = routes;

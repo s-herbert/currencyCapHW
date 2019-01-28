@@ -2,7 +2,7 @@ const calculateBudget = require('../../util/budgetCalculator');
 const simpleCache = require('../../util/bananaBudgetCache');
 
 module.exports = {
-  calculateTotal: (req, res, next) => {
+  getTotal: (req, res, next) => {
     const { startDate, numberOfDays } = req.query;
     const dateAndDuration = startDate + numberOfDays;
     let totalCost;
