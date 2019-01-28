@@ -16,8 +16,7 @@ function getBananaBudget(startDateStr, numberOfDays) {
   const ONE_DAY_MS = 86400000;
   const weeklyBananaPrices = [0.05, 0.1, 0.15, 0.2, 0.25];
   let currentDate = new Date(startDateStr);
-
-  if (Number.isNaN(currentDate)) {
+  if (isNaN(currentDate)) {
     throw new Error('Invalid date input');
   }
 
