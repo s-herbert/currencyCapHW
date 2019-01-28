@@ -15,7 +15,6 @@ const startServer = config => {
     });
 
     bananaAPI(app, config);
-
     const server = app.listen(config.port, () => resolve(server));
   });
 };
