@@ -1,9 +1,4 @@
 /*
-  for now, simple approach with while loop, 
-  can refactor later with more clever approach
-
-
-
   given input of mm/dd/yyyy, and a number of days....
   - build a map of price to week of month
   - create a Date obj from input
@@ -22,7 +17,7 @@ function getBananaBudget(startDateStr, numberOfDays) {
   const weeklyBananaPrices = [0.05, 0.1, 0.15, 0.2, 0.25];
   let currentDate = new Date(startDateStr);
 
-  if (isNaN(currentDate)) {
+  if (Number.isNaN(currentDate)) {
     throw new Error('Invalid date input');
   }
 
@@ -35,11 +30,11 @@ function getBananaBudget(startDateStr, numberOfDays) {
       const weekOfMonth = Math.floor(dayOfMonth / 7);
       const costToday = weeklyBananaPrices[weekOfMonth];
       total += costToday;
-      currentDate = new Date(currentDate.getTime() + ONE_DAY_MS);
     }
+    currentDate = new Date(currentDate.getTime() + ONE_DAY_MS);
     numberOfDays--;
   }
-  return total;
+  return Number(total.toFixed(2));
 }
 
 module.exports = getBananaBudget;
