@@ -1,13 +1,17 @@
 const calculateBudget = require('../../util/budgetCalculator');
-const cache = require('../../util/bananaBudgetCache');
+const simpleCache = require('../../util/bananaBudgetCache');
 
 module.exports = {
   calculateTotal: (req, res, next) => {
     const { startDate, numberOfDays } = req.query;
     const dateAndDuration = startDate + numberOfDays;
-    const totalCost = cache.has(dateAndDuration)
-      ? cache.getTotalFor(dateAndDuration)
-      : calculateBudget(startDate, numberOfDays);
+    let totalCost;
+    if (simpleCache.has(dateAndDuration)) {
+      totalCost = simpleCache.getTotalFor(dateAndDuration);
+    } else {
+      totalCost = calculateBudget(startDate, numberOfDays);
+      simpleCache.add(dateAndDuration, totalCost);
+    }
     res.locals.totalCost = totalCost;
     return next();
   },

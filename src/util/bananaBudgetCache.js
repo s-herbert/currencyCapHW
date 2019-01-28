@@ -3,7 +3,7 @@ module.exports = {
   has(key) {
     return this.cache[key] !== undefined;
   },
-  addToCache(key, total) {
+  add(key, total) {
     this.cache[key] = total;
   },
   getTotalFor(key) {
