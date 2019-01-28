@@ -36,8 +36,8 @@ function getBananaBudget(startDateStr, numberOfDays) {
       const costToday = weeklyBananaPrices[weekOfMonth];
       total += costToday;
       currentDate = new Date(currentDate.getTime() + ONE_DAY_MS);
-      numberOfDays--;
     }
+    numberOfDays--;
   }
   return total;
 }
