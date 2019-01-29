@@ -9,9 +9,9 @@ module.exports = {
   getTotalFor(key) {
     return this.cache[key];
   },
-  clear(interval) {
+  clear(interval_h) {
     setInterval(() => {
       this.cache = {};
-    }, interval);
+    }, interval_h * 60 * 60 * 1000);
   }
 };
