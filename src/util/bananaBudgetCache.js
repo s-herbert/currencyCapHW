@@ -1,4 +1,4 @@
-module.exports = {
+const cache = {
   cache: {},
   has(key) {
     return this.cache[key] !== undefined;
@@ -9,9 +9,15 @@ module.exports = {
   getTotalFor(key) {
     return this.cache[key];
   },
-  scheduleClear(hourlyInterval) {
+  scheduleClear(hourlyInterval = 24) {
     setInterval(() => {
+      console.log('Cache cleared');
       this.cache = {};
-    }, hourlyInterval * 60 * 60 * 1000);
+    }, hourlyInterval * 1000 * 60 * 60);
   }
+};
+
+module.exports = config => {
+  cache.scheduleClear(config.cacheClearIntervalHours);
+  return cache;
 };
