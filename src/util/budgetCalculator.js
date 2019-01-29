@@ -13,28 +13,29 @@
 */
 
 function getBananaBudget(startDateStr, numberOfDays) {
-  const weeklyBananaPrices = [0.05, 0.1, 0.15, 0.2, 0.25];
-  let currentDate = new Date(startDateStr);
-  if (isNaN(currentDate)) {
-    throw new Error('Invalid date input');
-  }
-
-  let total = 0;
-
-  while (numberOfDays > 0) {
-    total += increaseTotalIfWeekday(currentDate,weeklyBananaPrices);
-    currentDate = incrementOneDay(currentDate);
-    numberOfDays--;
-  }
-  return Number(total.toFixed(2));
+  let startDate = new Date(startDateStr);
+  if (isNaN(startDate)) throw new Error('Invalid date input');
+  const total = calculatePricesForEachDay(startDate, numberOfDays);
+  return floatToDec(total);
 }
 
-function increaseTotalIfWeekday(currentDate,prices){
+function calculatePricesForEachDay(currentDate, numDays){
+  let total = 0;
+  while (numDays > 0) {
+    total += increaseTotalIfWeekday(currentDate);
+    currentDate = incrementOneDay(currentDate);
+    numDays--;
+  }
+  return total;
+}
+
+function increaseTotalIfWeekday(currentDate){
+  const weeklyBananaPrices = [0.05, 0.1, 0.15, 0.2, 0.25];
   const dayOfWeek = currentDate.getDay();
   if (dayOfWeek && dayOfWeek !== 6) {
     const dayOfMonth = currentDate.getDate();
     const weekOfMonth = Math.floor(dayOfMonth / 7);
-    const costToday = prices[weekOfMonth];
+    const costToday = weeklyBananaPrices[weekOfMonth];
     return costToday;
   }
   return 0;
@@ -43,6 +44,10 @@ function increaseTotalIfWeekday(currentDate,prices){
 function incrementOneDay(currentDate){
   const ONE_DAY_MS = 86400000;
   return new Date(currentDate.getTime() + ONE_DAY_MS);
+}
+
+function floatToDec(float){
+  return Number(float.toFixed(2))
 }
 
 
