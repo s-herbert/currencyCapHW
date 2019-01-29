@@ -13,9 +13,13 @@ const cache = {
     setInterval(() => {
       console.log('Cache cleared');
       this.cache = {};
-    }, hourlyInterval * 1000 * 60 * 60);
+    }, hoursToMs(hourlyInterval) );
   }
 };
+
+function hoursToMs(hours) {
+  return hours * 1000 * 60 * 60;
+}
 
 module.exports = config => {
   cache.scheduleClear(config.cacheClearIntervalHours);
