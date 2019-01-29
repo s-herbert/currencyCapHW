@@ -8,5 +8,8 @@ module.exports = {
   },
   getTotalFor(key) {
     return this.cache[key];
+  },
+  clear(){
+    this.cache = {};
   }
 };
