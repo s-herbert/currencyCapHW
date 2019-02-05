@@ -1,3 +1,4 @@
 module.exports = {
-  port: 1444
+  port: 1444,
+  cacheClearIntervalHours: 3,
 };
